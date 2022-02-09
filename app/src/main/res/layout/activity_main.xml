@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+
+        <TextView
+            android:id="@+id/tvLiveData"
+            style="@style/textView"
+            android:text="Hello Word"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnLiveData"
+            style="@style/button"
+            android:text="LIVEDATA"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLiveData" />
+
+        <TextView
+            android:id="@+id/tvStateFlow"
+            style="@style/textView"
+            android:text="Hello Word"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLiveData" />
+
+        <Button
+            android:id="@+id/btnStateFlow"
+            style="@style/button"
+            android:text="STATEFLOW"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStateFlow" />
+
+        <TextView
+            android:id="@+id/tvFlow"
+            style="@style/textView"
+            android:layout_marginTop="20dp"
+            android:text="Hello Word"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnStateFlow" />
+
+        <Button
+            android:id="@+id/btnFlow"
+            style="@style/button"
+            android:text="FLOW"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFlow" />
+
+        <TextView
+            android:id="@+id/tvSharedFlow"
+            style="@style/textView"
+            android:text="Hello Word"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFlow" />
+
+        <Button
+            android:id="@+id/btnSharedFlow"
+            style="@style/button"
+            android:text="SHAREDFLOW"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSharedFlow" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
