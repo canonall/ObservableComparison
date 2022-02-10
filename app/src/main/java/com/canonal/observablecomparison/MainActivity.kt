@@ -2,10 +2,13 @@ package com.canonal.observablecomparison
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.canonal.observablecomparison.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -50,16 +53,14 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.liveData.observe(this) {
             binding.tvLiveData.text = it
         }
-        //use "launchWhenStarted" insted of "launch" with StateFlow
-        lifecycleScope.launchWhenStarted {
-            mainViewModel.stateFlow.collectLatest {
-                binding.tvStateFlow.text = it
+        //use repeatOnLifeCycle to make it lifecycle aware
+        collectLatestStateFlowAsLifeCycleAware(mainViewModel.stateFlow) {
+            binding.tvStateFlow.text = it
 //                Snackbar.make(
 //                    binding.root,
 //                    it,
 //                    Snackbar.LENGTH_LONG
 //                ).show()
-            }
         }
 
         lifecycleScope.launchWhenStarted {
@@ -70,6 +71,17 @@ class MainActivity : AppCompatActivity() {
                     it,
                     Snackbar.LENGTH_LONG
                 ).show()
+            }
+        }
+    }
+
+    private fun <T> AppCompatActivity.collectLatestStateFlowAsLifeCycleAware(
+        flow: Flow<T>,
+        collect: (T) -> Unit
+    ) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collectLatest(collect)
             }
         }
     }

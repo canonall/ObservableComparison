@@ -20,7 +20,7 @@ class MainViewModel : ViewModel() {
     /***
      * - StateFlow is a Flow and because of that
      *   it should be observed in a coroutine scope
-     * - Use launchWhenStarted instead of launch
+     * - To make them lifecycle aware use repeatOnLifecycle(STARTED)
      * - Provides the power of flow operators for later operations
      *   like map and filter. Also they are easier to test with the
      *   background Coroutines capabilities. (Delay of coroutines are skipped during tests)
