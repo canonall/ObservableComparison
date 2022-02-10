@@ -63,16 +63,16 @@ class MainActivity : AppCompatActivity() {
 //                ).show()
         }
 
-        lifecycleScope.launchWhenStarted {
-            mainViewModel.sharedFlow.collectLatest {
-                binding.tvSharedFlow.text = it
-                Snackbar.make(
-                    binding.root,
-                    it,
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+        collectSharedFlowAsLifeCycleAware(mainViewModel.sharedFlow) {
+            binding.tvSharedFlow.text = it
+            Snackbar.make(
+                binding.root,
+                it,
+                Snackbar.LENGTH_LONG
+            ).show()
+
         }
+
     }
 
     private fun <T> AppCompatActivity.collectLatestStateFlowAsLifeCycleAware(
@@ -82,6 +82,17 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 flow.collectLatest(collect)
+            }
+        }
+    }
+
+    private fun <T> AppCompatActivity.collectSharedFlowAsLifeCycleAware(
+        flow: Flow<T>,
+        collect: (T) -> Unit
+    ) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collect(collect)
             }
         }
     }
